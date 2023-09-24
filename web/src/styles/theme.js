@@ -13,8 +13,8 @@ export const theme = {
         inputBg: '#262529',
         inputText: '#FFF',
         
-        buttonText: '#FF859B',
-        buttonBg: '#1C1B1E',
+        buttonBg: '#FF859B',
+        buttonText: '#1C1B1E',
 
         textLink: '#FF859B',
     }
