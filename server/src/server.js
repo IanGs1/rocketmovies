@@ -1,7 +1,9 @@
 require('express-async-errors');
-const AppError = require('./utils/AppError');
 
 const express = require('express');
+
+const AppError = require('./utils/AppError');
+const router = require('./routes');
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use((error, request, reply, next) => {
         message: error.message
     })
 });
+
+app.use(router);
 
 app.listen(3333, () => {
     console.log('http://localhost:3333');
