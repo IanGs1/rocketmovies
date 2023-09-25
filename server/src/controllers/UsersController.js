@@ -66,9 +66,13 @@ class UsersController {
         user.name = name ?? user.name;
         user.email = email ?? user.email;
 
-        const hashedPassword = await hash(new_password, 8);
+        if (new_password) {
+            const hashedPassword = await hash(new_password, 8);
 
-        new_password ? await knex("users").where({ id }).update({ password: hashedPassword }) : '';
+            await knex("users").wherer({ id }).update({
+                password: hashedPassword
+            })
+        }
 
         await knex("users").where({ id }).update({
             name: user.name,
