@@ -39,5 +39,26 @@ export const theme = {
 
         tagBg: '#312E38',
         tagText: '#E5E5E5',
+    },
+
+    newMovie: {
+        back: '#FF859B',
+        title: '#F4EDE8',
+
+        textAreaBg: '#262529',
+        textAreaText: '#FFF',
+        textAreaPlaceholder: '#948F99',
+
+        markersTitle: '#999591',
+        markersBg: '#0D0C0F',
+
+        markerBg: '#262529',
+        markerText: '#FFFFFF',
+
+        deleteButtonBg: '#0D0C0F',
+        deleteButtonText: '#FF859B',
+
+        createButtonBg: '#FF859B',
+        createButtonText: '#312E38',
     }
 }
