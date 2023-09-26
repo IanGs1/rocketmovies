@@ -18,11 +18,26 @@ export const theme = {
 
         textLink: '#FF859B',
     },
+
     header: {
         background: '#1C1B1E',
         brand: '#FF859B',
         
         profileText: '#F4EDE8',
         profileSpan: '#948F99',
+    },
+
+    home: {
+        title: '#FFF',
+
+        buttonBg: '#FF859B',
+        buttonText: '#1C1B1E',
+
+        movieBg: 'rgba(255, 133, 155, 0.05)',
+        movieTitle: '#F4EDE8',
+        movieDescription: '#999591',
+
+        tagBg: '#312E38',
+        tagText: '#E5E5E5',
     }
 }

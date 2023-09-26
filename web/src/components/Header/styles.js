@@ -10,6 +10,8 @@ export const Container = styled.div`
     padding: 2.4rem 12.3rem;
 
     border-bottom: 1px solid #3E3B47;
+
+    grid-area: header;
 `;
 
 export const Brand = styled.h3`
