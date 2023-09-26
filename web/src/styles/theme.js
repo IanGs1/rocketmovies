@@ -17,5 +17,12 @@ export const theme = {
         buttonText: '#1C1B1E',
 
         textLink: '#FF859B',
+    },
+    header: {
+        background: '#1C1B1E',
+        brand: '#FF859B',
+        
+        profileText: '#F4EDE8',
+        profileSpan: '#948F99',
     }
 }
