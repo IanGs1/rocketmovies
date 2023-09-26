@@ -14,7 +14,6 @@ export const Container = styled.div`
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     gap: 4rem;
 
     padding: 5.4rem 12.3rem;

@@ -60,5 +60,9 @@ export const theme = {
 
         createButtonBg: '#FF859B',
         createButtonText: '#312E38',
+    },
+
+    movie: {
+        title: '#F4EDE8'
     }
 }

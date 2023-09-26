@@ -3,7 +3,7 @@ import { Container, Description, Tags } from './styles';
 import { Stars } from '../Stars';
 import { Tag } from '../Tag';
 
-export function Movie({ title, rating = 4, children, tags = [] }) {
+export function Card({ title, rating = 4, children, tags = [] }) {
     return (
         <Container>
             <h1>{title}</h1>
