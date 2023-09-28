@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Link } from 'react-router-dom';
+
 export const Container = styled.div`
     height: 100vh;
 
@@ -36,27 +38,29 @@ export const TextWrapper = styled.div`
         font-weight: 400;
         line-height: normal;
     }
+`;
 
-    > button {
-        max-height: 4.8rem;
+export const Button = styled(Link)`
+    max-height: 4.8rem;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
 
-        background: ${({ theme }) => theme.home.buttonBg};
-        color: ${({ theme }) => theme.home.buttonText};
+    text-decoration: none;
 
-        font-feature-settings: 'liga' off;
-        font-family: 'Roboto Slab';
-        font-size: 1.6rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    background: ${({ theme }) => theme.home.buttonBg};
+    color: ${({ theme }) => theme.home.buttonText};
 
-        border: none;
-        border-radius: 8px;
-        padding: 3.2rem;
-    }
+    font-feature-settings: 'liga' off;
+    font-family: 'Roboto Slab';
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border: none;
+    border-radius: 8px;
+    padding: 3.2rem;
 `;

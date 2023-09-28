@@ -5,7 +5,7 @@ import { Tag } from '../Tag';
 
 export function Card({ title, rating = 4, children, tags = [] }) {
     return (
-        <Container>
+        <Container to='/2'>
             <h1>{title}</h1>
 
             <Stars rating={rating}/>

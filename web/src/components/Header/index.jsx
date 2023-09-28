@@ -9,7 +9,7 @@ export function Header() {
 
             <Input title="Pesquisar pelo título"/>
 
-            <Profile>
+            <Profile to='/profile'>
                 <TextWrapper>
                     <p>Ian Goldfeld Santos</p>
                     <span>sair</span>

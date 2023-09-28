@@ -1,6 +1,6 @@
 import { FiPlus } from 'react-icons/fi';
 
-import { Container, Content, TextWrapper } from './styles';
+import { Container, Content, TextWrapper, Button } from './styles';
 
 import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
@@ -14,10 +14,10 @@ export function Home() {
                 <TextWrapper>
                     <h1>Meus filmes</h1>
                     
-                    <button>
+                    <Button to='/new'>
                         <FiPlus size={16}/>
                         Adicionar filme
-                    </button>
+                    </Button>
                 </TextWrapper>
 
                 <Card title="Interestellar" rating={4} tags={[{id: 1, name: 'Ficção Científica'}, {id: 2, name: 'Drama'}]}>

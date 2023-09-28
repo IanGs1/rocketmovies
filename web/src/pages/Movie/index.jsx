@@ -1,5 +1,7 @@
 import { FiArrowLeft, FiClock } from 'react-icons/fi';
 
+import { Link } from 'react-router-dom';
+
 import { Container, Content, Search, Title, Infos, Profile, Time, Tags, Summary, } from './styles';
 
 import { Header } from '../../components/Header';
@@ -13,10 +15,10 @@ export function Movie() {
 
             <Content>
                 <Search>
-                    <a href="">
+                    <Link to='/'>
                         <FiArrowLeft />
                         Voltar
-                    </a>
+                    </Link>
 
                     <Title>
                         <h1>Interestellar</h1>

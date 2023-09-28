@@ -16,9 +16,8 @@ export const Container = styled.div`
     }
 
     padding: 6.3rem 14.4rem;
-`;
-
-export const Link = styled.a`
+    
+    > a {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -32,6 +31,7 @@ export const Link = styled.a`
         font-weight: 400;
         line-height: normal;
         text-decoration: none;
+    }
 `;
 
 export const ProfileForm = styled.div`

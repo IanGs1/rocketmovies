@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from 'react-router-dom';
+
 import backgroundImg from '../../assets/backgroundImg.png';
 
 export const Container = styled.div`
@@ -16,7 +18,25 @@ export const Main = styled.div`
     align-items: flex-start;
     gap: 4.5rem;
 
-    padding: 0 13.4rem
+    padding: 0 13.4rem;
+
+    > a {
+        width: 34rem;
+
+        color: ${({ theme }) => theme.signIn.textLink};
+        font-family: 'Roboto Slab';
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        text-decoration: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .8rem;
+    }
 `;
 
 export const TextWrapper = styled.div`
@@ -83,24 +103,6 @@ export const Button = styled.button`
     padding: 1.6rem;
 
 `;
-
-export const Link = styled.a`
-    width: 34rem;
-
-    color: ${({ theme }) => theme.signIn.textLink};
-    font-family: 'Roboto Slab';
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
-    text-decoration: none;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .8rem;
-`
 
 export const Background = styled.div`
     background: url(${backgroundImg}) no-repeat center;

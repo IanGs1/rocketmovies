@@ -6,6 +6,7 @@ import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 import { TextArea } from '../../components/TextArea';
 import { Marker } from '../../components/Marker';
+import { Link } from 'react-router-dom';
 
 export function NewMovie() {
     return (
@@ -14,10 +15,10 @@ export function NewMovie() {
             
             <Content>
                 <Guide>
-                    <a href="">
+                    <Link to='/'>
                         <FiArrowLeft />
                         Voltar
-                    </a>
+                    </Link>
 
                     <h1>Novo filme</h1>
                 </Guide>

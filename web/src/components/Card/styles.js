@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+import { Link } from 'react-router-dom';
+
+export const Container = styled(Link)`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -9,6 +11,8 @@ export const Container = styled.div`
 
     border-radius: 16px;
     padding: 3.2rem;
+
+    text-decoration: none;
 
     > h1 {
         color: ${({ theme }) => theme.home.movieTitle};

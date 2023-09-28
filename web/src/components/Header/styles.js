@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Link } from 'react-router-dom';
+
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
@@ -23,11 +25,13 @@ export const Brand = styled.h3`
     line-height: normal;
 `;
 
-export const Profile = styled.div`
+export const Profile = styled(Link)`
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: .9rem;
+
+    text-decoration: none;
 
     > img {
         width: 64px;
