@@ -50,19 +50,23 @@ class MoviesController {
     }
 
     async show(request, reply) {
-        const { movie_id } = request.params;
+        const { title } = request.query;
 
-        const [movie] = await knex("movies").where({ id: movie_id });
+        const [movie] = await knex("movies").whereLike('title', `%${title}%`);
         if (!movie) {
-            throw new AppError("Movie not found, please insert a valid ID!", 404);
+            throw new AppError("Movie not found, please insert a valid title!", 404);
         }
 
-        const tags = await knex("tags").where({ movie_id }).orderBy('name');
+        const tags = await knex("tags").where({ movie_id: movie.id }).orderBy('name');
 
         return reply.status(200).json({
             ...movie,
             tags
         })
+    }
+
+    async index(request, reply) {
+
     }
 
     async delete(request, reply) {
