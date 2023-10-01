@@ -66,7 +66,16 @@ class MoviesController {
     }
 
     async index(request, reply) {
+        const { user_id } = request.params;
 
+        const [user] = await knex("users").where({ id: user_id });
+        if (!user) {
+            throw new AppError("User not found, please insert a valid ID!", 404);
+        }
+
+        const movies = await knex("movies").where({ user_id });
+
+        return reply.status(200).json(movies)
     }
 
     async delete(request, reply) {
