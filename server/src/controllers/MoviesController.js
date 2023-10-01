@@ -48,6 +48,35 @@ class MoviesController {
             tags,
         })
     }
+
+    async show(request, reply) {
+        const { movie_id } = request.params;
+
+        const [movie] = await knex("movies").where({ id: movie_id });
+        if (!movie) {
+            throw new AppError("Movie not found, please insert a valid ID!", 404);
+        }
+
+        const tags = await knex("tags").where({ movie_id }).orderBy('name');
+
+        return reply.status(200).json({
+            ...movie,
+            tags
+        })
+    }
+
+    async delete(request, reply) {
+        const { movie_id } = request.params;
+        
+        const [movie] = await knex("movies").where({ id: movie_id });
+        if (!movie) {
+            throw new AppError("Movie not found, please insert a valid ID!", 404);
+        }
+
+        await knex("movies").where({ id: movie_id }).delete();
+
+        return reply.status(200).json();
+    }
 };
 
 module.exports = MoviesController;
