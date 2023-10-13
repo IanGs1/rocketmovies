@@ -5,9 +5,15 @@ const express = require('express');
 const AppError = require('./utils/AppError');
 const router = require('./routes');
 
+const uploadConfig = require('./configs/upload');
+
 const app = express();
 
 app.use(express.json());
+
+app.use(router);
+
+app.use('/files', express.static(uploadConfig.UPLOAD_FOLDER));
 
 app.use((error, request, response, next) => {
     if (error instanceof AppError) {
@@ -22,8 +28,6 @@ app.use((error, request, response, next) => {
         message: "Internal server error"
     })
 })
-
-app.use(router);
 
 app.listen(3333, () => {
     console.log('http://localhost:3333');
