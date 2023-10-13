@@ -5,7 +5,7 @@ const AppError = require('../utils/AppError');
 class MoviesController {
     async create(request, reply) {
         const { title, description, rating, tags } = request.body;
-        const { user_id } = request.params;
+        const { id: user_id } = request.user;
 
         const [userExists] = await knex("users").where({ id: user_id });
         if (!userExists) {
@@ -50,10 +50,13 @@ class MoviesController {
     }
 
     async show(request, reply) {
+        const { user_id } = request.params;
         const { title } = request.query;
 
-        const [movie] = await knex("movies").whereLike('title', `%${title}%`);
+        const [movie] = await knex("movies").whereLike('title', `%${title}%`).where({ user_id });
         if (!movie) {
+            console.log("Movie not found, please insert a valid title!")
+
             throw new AppError("Movie not found, please insert a valid title!", 404);
         }
 
@@ -66,10 +69,12 @@ class MoviesController {
     }
 
     async index(request, reply) {
-        const { user_id } = request.params;
+        const { id: user_id } = request.user;
 
         const [user] = await knex("users").where({ id: user_id });
         if (!user) {
+            console.log("User not found, please insert a valid ID!")
+
             throw new AppError("User not found, please insert a valid ID!", 404);
         }
 

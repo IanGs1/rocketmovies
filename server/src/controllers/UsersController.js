@@ -28,7 +28,7 @@ class UsersController {
     }
 
     async show(request, reply) {
-        const { id } = request.params;
+        const { id } = request.user;
 
         const [user] = await knex("users").where({ id }).select("id", "name", "email", "created_at", "updated_at");
         if (!user || user.length === 0) {
@@ -37,16 +37,10 @@ class UsersController {
 
         return reply.status(200).json(user);
     }
-    
-    async index(request, reply) {
-        const users = await knex("users").select("name", "email", "avatar", "created_at", "updated_at");
-
-        reply.status(200).json(users);
-    }
 
     async update(request, reply) {
         const { name, email, password, new_password } = request.body;
-        const { id } = request.params;
+        const { id } = request.user;
 
         const [user] = await knex("users").where({ id });
         if (!user) {
@@ -69,7 +63,7 @@ class UsersController {
         if (new_password) {
             const hashedPassword = await hash(new_password, 8);
 
-            await knex("users").wherer({ id }).update({
+            await knex("users").where({ id }).update({
                 password: hashedPassword
             })
         }
@@ -89,7 +83,7 @@ class UsersController {
 
     async delete(request, reply) {
         const { password } = request.body;
-        const { id } = request.params;
+        const { id } = request.user;
 
         const [user] = await knex("users").where({ id });
         if (!user) {
