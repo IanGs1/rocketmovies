@@ -16,7 +16,7 @@ function AuthProvider({ children }) {
             localStorage.setItem('@rocketmovies:user', JSON.stringify(user));
             localStorage.setItem('@rocketmovies:token', token);
 
-            api.defaults.headers.authorization = `Bearer ${token}`;
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             setData({ user, token });
 
         } catch (error) {
@@ -28,12 +28,19 @@ function AuthProvider({ children }) {
         }
     }
 
+    async function signOut() {
+        localStorage.removeItem('@rocketmovies:user');
+        localStorage.removeItem('@rocketmovies:token');
+
+        setData({});
+    }
+
     useEffect(() => {
         const user = localStorage.getItem('@rocketmovies:user');
         const token = localStorage.getItem('@rocketmovies:token');
 
         if (user && token) {
-            api.defaults.headers.authorization = `Bearer ${token}`;
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
             setData({
                 user: JSON.parse(user),
@@ -43,7 +50,7 @@ function AuthProvider({ children }) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ signIn, user: data.user }}>
+        <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
             { children }
         </AuthContext.Provider>
     )

@@ -25,14 +25,16 @@ export const Brand = styled.h3`
     line-height: normal;
 `;
 
-export const Profile = styled(Link)`
+export const Profile = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: .9rem;
 
     text-decoration: none;
+`;
 
+export const ProfilePicture = styled(Link)`
     > img {
         width: 64px;
         height: 64px;
@@ -63,5 +65,7 @@ export const TextWrapper = styled.div`
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+
+        cursor: pointer;
     }
 `;
