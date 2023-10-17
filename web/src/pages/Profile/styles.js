@@ -46,6 +46,7 @@ export const ProfileForm = styled.div`
     position: relative;
 
     margin: 0 auto 6.4rem;
+    
     > img {
         width: 100%;
         height: 100%;
@@ -92,12 +93,12 @@ export const FormWrapper = styled.div`
     > div {
         margin-bottom: .8rem;
 
-        > input {
+        /* > input {
             &.placeholderSpecial {
                 &::placeholder {
-                    color: #F4EDE8;
+                    color: #F45DE8;
                 }
             }
-        }
+        } */
     }
 `
