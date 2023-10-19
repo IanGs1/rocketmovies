@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 
 import { Container, ProfileForm, InputWrapper, Form, FormWrapper } from './styles';
 
+import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
+
 import { useAuth } from '../../hooks/auth';
 import { useState } from 'react';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { api } from '../../services/api';
 
 export function Profile() {
     const { user, updateProfile } = useAuth();
@@ -18,6 +21,10 @@ export function Profile() {
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
 
+    const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder; 
+    const [avatar, setAvatar] = useState(avatarUrl);
+    const [avatarFile, setAvatarFile] = useState(null);
+
     async function handleUpdateProfile() {
         const user = {
             name,
@@ -26,7 +33,15 @@ export function Profile() {
             new_password: newPassword
         }
 
-        await updateProfile({ user });
+        await updateProfile({ user, avatarFile });
+    }
+
+    function handleUpdateAvatar(event) {
+        const file = event.target.files[0];
+        setAvatarFile(file);
+
+        const imagePreview = URL.createObjectURL(file);
+        setAvatar(imagePreview);
     }
 
     return (
@@ -37,14 +52,14 @@ export function Profile() {
             </Link>
 
             <ProfileForm>
-                <img src="https://github.com/iangs1.png" alt="Foto de perfil do usuário" />
+                <img src={avatar} alt="Foto de perfil do usuário" />
                 
                 <InputWrapper>
                     <label htmlFor="photoInput">
                         <FiCamera size={20} stroke='#312E38'/>
                     </label>
 
-                    <input type="file" id='photoInput'/>
+                    <input type="file" id='photoInput' onChange={handleUpdateAvatar}/>
                 </InputWrapper>
             </ProfileForm>
 

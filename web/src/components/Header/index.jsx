@@ -1,11 +1,16 @@
 import { Container, Brand, Profile, TextWrapper, ProfilePicture } from './styles';
 
+import { api } from '../../services/api';
+import avatarPlaceholder from '../../assets/avatarPlaceholder.svg';
+
 import { useAuth } from '../../hooks/auth';
 
 import { Input } from '../Input';
 
 export function Header() {
-    const { signOut } = useAuth();
+    const { signOut, user } = useAuth();
+
+    const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
 
     function handleSignOut() {
         signOut();
@@ -19,12 +24,12 @@ export function Header() {
 
             <Profile>
                 <TextWrapper>
-                    <p>Ian Goldfeld Santos</p>
+                    <p>{user.name}</p>
                     <span onClick={handleSignOut}>sair</span>
                 </TextWrapper>
 
                 <ProfilePicture to='/profile'>
-                    <img src="https://github.com/iangs1.png" alt="Imagem de perfil do usuário" />
+                    <img src={avatarUrl} alt={`Imagem de perfil de ${user.name}`} />
                 </ProfilePicture>
             </Profile>
         </Container>

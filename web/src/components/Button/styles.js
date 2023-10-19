@@ -22,5 +22,7 @@ export const Container = styled.button`
 
     &.unactive {
         filter: opacity(.5);
+
+        cursor: auto;
     }
 `;
