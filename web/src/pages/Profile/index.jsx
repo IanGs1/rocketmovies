@@ -66,14 +66,14 @@ export function Profile() {
             <Form onSubmit={e => e.preventDefault()}>
                 <FormWrapper>
                     <Input 
-                    title={user.name} 
+                    defaultValue={user.name} 
                     icon={FiUser} 
                     className="placeholderSpecial"
                     onChange={e => setName(e.target.value)}
                     />
 
                     <Input 
-                    title={user.email} 
+                    defaultValue={user.email} 
                     icon={FiMail} 
                     className="placeholderSpecial"
                     onChange={e => setEmail(e.target.value)}
