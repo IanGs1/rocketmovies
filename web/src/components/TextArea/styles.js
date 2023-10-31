@@ -16,6 +16,8 @@ export const Container = styled.textarea`
     border-radius: 10px;
     padding: 1.9rem 1.6rem;
 
+    resize: none;
+
     &::placeholder {
         color: ${({ theme }) => theme.newMovie.textAreaPlaceholder};
         font-family: 'Roboto';

@@ -23,8 +23,6 @@ function ensureAuthenticated(request, response, next) {
 
         next();
     } catch {
-        console.log("JWT Token invalid!");
-
         throw new AppError("JWT Token invalid!", 401)
     }
 }

@@ -44,5 +44,9 @@ export const Container = styled.div`
 
     > svg {
         color: #FF859B;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 `;

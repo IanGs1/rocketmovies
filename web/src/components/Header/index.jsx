@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/auth';
 
 import { Input } from '../Input';
 
-export function Header() {
+export function Header({ ...rest }) {
     const { signOut, user } = useAuth();
 
     const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
@@ -20,7 +20,7 @@ export function Header() {
         <Container>
             <Brand>RocketMovies</Brand>
 
-            <Input title="Pesquisar pelo título"/>
+            <Input title="Pesquisar pelo título" {...rest}/>
 
             <Profile>
                 <TextWrapper>

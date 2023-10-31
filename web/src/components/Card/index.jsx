@@ -14,13 +14,13 @@ export function Card({ title, rating = 4, children, tags = [] }) {
                 {children}
             </Description>
 
-            <Tags>
+            {/* <Tags>
                 {tags.map(tag => {
                     return (
                         <Tag key={tag.id}>{tag.name}</Tag>
                     )
                 })}
-            </Tags>
+            </Tags> */}
         </Container>
     )
 }

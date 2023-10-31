@@ -49,7 +49,7 @@ class MoviesController {
         })
     }
 
-    async show(request, reply) {
+    async search(request, reply) {
         const { user_id } = request.params;
         const { title } = request.query;
 
@@ -65,6 +65,22 @@ class MoviesController {
         return reply.status(200).json({
             ...movie,
             tags
+        })
+    }
+
+    async show(request, reply) {
+        const { movie_id } = request.params;
+
+        const movie = await knex("movies").where({ id: movie_id }).first();
+        if (!movie) {
+            throw new AppError('Movie not found, please insert a valid ID!');
+        }
+
+        const tags = await knex("tags").where({ movie_id });
+
+        return reply.status(200).json({
+            movie,
+            tags,
         })
     }
 
