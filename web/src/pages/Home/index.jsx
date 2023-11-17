@@ -19,8 +19,7 @@ export function Home() {
         }
 
         handleListMovies();
-    }, []);
-
+    }, [])
 
     return (
         <Container>
@@ -38,9 +37,9 @@ export function Home() {
 
                 {
                     movies.map((movie, index) => (
-                        <Card key={index} title={movie.title} rating={movie.rating}>
-                            {movie.description}
-                        </Card>
+                    <Card key={index} title={movie.title} rating={movie.rating} tags={movie.tags}>
+                     {movie.description}
+                     </Card>
                     ))
                 }
             </Content>

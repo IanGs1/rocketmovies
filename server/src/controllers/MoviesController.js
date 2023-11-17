@@ -95,8 +95,18 @@ class MoviesController {
         }
 
         const movies = await knex("movies").where({ user_id });
+        const userTags = await knex("tags").where({ user_id });
 
-        return reply.status(200).json(movies)
+        const movieWithTags = movies.map( movie => {
+            const movieTags = userTags.filter(tag => tag.movie_id === movie.id);
+
+            return {
+                ...movie,
+                tags: movieTags,
+            }
+        });
+
+        return reply.status(200).json(movieWithTags);
     }
 
     async delete(request, reply) {

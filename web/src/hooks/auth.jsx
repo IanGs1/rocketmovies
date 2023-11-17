@@ -61,17 +61,21 @@ function AuthProvider({ children }) {
     }
 
     useEffect(() => {
-        const user = localStorage.getItem('@rocketmovies:user');
-        const token = localStorage.getItem('@rocketmovies:token');
-
-        if (user && token) {
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-            setData({
-                user: JSON.parse(user),
-                token,
-            })
+        async function ensureUserLoginIsValid() {
+            const user = localStorage.getItem('@rocketmovies:user');
+            const token = localStorage.getItem('@rocketmovies:token');
+    
+            if (user && token) {            
+                    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    
+                    setData({
+                        user: JSON.parse(user),
+                        token,
+                    })
+            }
         }
+
+        ensureUserLoginIsValid();
     }, [])
 
     return (

@@ -1,4 +1,4 @@
-const { sign } = require('jsonwebtoken');
+const { sign, verify } = require('jsonwebtoken');
 const authConfig = require('../configs/auth');
 
 const knex = require('../database/knex');
@@ -27,6 +27,19 @@ class SessionsController {
         });
 
         return reply.json({user, token});
+    }
+
+    async show(request, reply) {
+        const { token } = request.body;
+
+        const tokenIsValid = verify(token, authConfig.jwt.secret,);
+        if (!tokenIsValid) {
+            throw new AppError("Token is either expired or invalid!", 401);
+        }
+
+        return reply.status(200).json({
+            token
+        });
     }
 }
 
