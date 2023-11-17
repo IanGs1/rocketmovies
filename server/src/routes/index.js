@@ -4,6 +4,7 @@ const userRoutes = require('./user.routes');
 const moviesRoutes = require('./movies.routes');
 const sessionsRoutes = require('./sessions.routes');
 const tagsRoutes = require('./tags.routes');
+const searchRoutes = require('./search.routes');
 
 const router = Router();
 
@@ -14,6 +15,7 @@ router.get('/', (request, reply) => {
 router.use('/users', userRoutes);
 router.use('/movies', moviesRoutes);
 router.use('/tags', tagsRoutes);
+router.use('/search', searchRoutes);
 router.use('/sessions', sessionsRoutes);
 
 module.exports = router;

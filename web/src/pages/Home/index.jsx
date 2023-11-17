@@ -10,6 +10,7 @@ import { Card } from '../../components/Card';
 
 export function Home() {
     const [movies, setMovies] = useState([]);
+    const [title, setTitle] = useState([]);
 
     useEffect(() => {
         async function handleListMovies() {
@@ -19,11 +20,21 @@ export function Home() {
         }
 
         handleListMovies();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        async function handleSearchMovie() {
+            const response = await api.get(`/search?title=${title}`);
+
+            setMovies(response.data);
+        }
+
+        handleSearchMovie();
+    }, [title]);
 
     return (
         <Container>
-            <Header />
+            <Header onChange={e => setTitle(e.target.value)} />
 
             <Content>
                 <TextWrapper>

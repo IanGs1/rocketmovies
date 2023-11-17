@@ -49,25 +49,6 @@ class MoviesController {
         })
     }
 
-    async search(request, reply) {
-        const { user_id } = request.params;
-        const { title } = request.query;
-
-        const [movie] = await knex("movies").whereLike('title', `%${title}%`).where({ user_id });
-        if (!movie) {
-            console.log("Movie not found, please insert a valid title!")
-
-            throw new AppError("Movie not found, please insert a valid title!", 404);
-        }
-
-        const tags = await knex("tags").where({ movie_id: movie.id }).orderBy('name');
-
-        return reply.status(200).json({
-            ...movie,
-            tags
-        })
-    }
-
     async show(request, reply) {
         const { movie_id } = request.params;
 
@@ -97,7 +78,7 @@ class MoviesController {
         const movies = await knex("movies").where({ user_id });
         const userTags = await knex("tags").where({ user_id });
 
-        const movieWithTags = movies.map( movie => {
+        const moviesWithTags = movies.map( movie => {
             const movieTags = userTags.filter(tag => tag.movie_id === movie.id);
 
             return {
@@ -106,7 +87,7 @@ class MoviesController {
             }
         });
 
-        return reply.status(200).json(movieWithTags);
+        return reply.status(200).json(moviesWithTags);
     }
 
     async delete(request, reply) {
