@@ -4,6 +4,7 @@ import { Container, Content, TextWrapper, Button } from './styles';
 
 import { useState, useEffect } from 'react';
 import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
@@ -48,7 +49,7 @@ export function Home() {
 
                 {
                     movies.map((movie, index) => (
-                    <Card key={index} title={movie.title} rating={movie.rating} tags={movie.tags}>
+                    <Card key={index} title={movie.title} rating={movie.rating} tags={movie.tags} movieId={movie.id}>
                      {movie.description}
                      </Card>
                     ))

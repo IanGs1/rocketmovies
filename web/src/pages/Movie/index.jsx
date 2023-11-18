@@ -1,6 +1,9 @@
 import { FiArrowLeft, FiClock } from 'react-icons/fi';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { api } from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 import { Container, Content, Search, Title, Infos, Profile, Time, Tags, Summary, } from './styles';
 
@@ -9,6 +12,50 @@ import { Stars } from '../../components/Stars';
 import { Tag } from '../../components/Tag';
 
 export function Movie() {
+    const [movie, setMovie] = useState(null);
+
+    const [hour, setHour] = useState('');
+    const [minute, setMinute] = useState('');
+
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+
+    const { user } = useAuth();
+
+    const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+
+    const params = useParams();
+    
+    function handleFormatCreatedAt() {
+        const dateAndTime = movie.movie.created_at && movie.movie.created_at.split(" ");
+
+        const dateArray = dateAndTime[0];
+        const timeArray = dateAndTime[1];
+
+        const date = dateArray.split("-");
+        const time = timeArray.split(":");
+
+        setHour(time[0]);
+        setMinute(time[1]);
+
+        setDay(date[2]);
+        setMonth(date[1]);
+        setYear(date[0].slice(-2));
+    }
+
+    useEffect(() => {
+        async function handleLoadMovieInfos() {
+            const response = await api.get(`/movies/${params.movie_id}`);
+
+            setMovie(response.data);
+        }
+
+        handleLoadMovieInfos();
+        movie && handleFormatCreatedAt();
+    })
+
+
     return (
         <Container>
             <Header />
@@ -21,51 +68,46 @@ export function Movie() {
                     </Link>
 
                     <Title>
-                        <h1>Interestellar</h1>
+                        {
+                            movie && 
+                            <h1>{movie.movie.title}</h1>
+                        }
 
-                        <Stars rating={4} size={20}/>
+                        {
+                            movie && 
+                            <Stars rating={movie.movie.rating} size={20}/>
+                        }
                     </Title>
 
                     <Infos>
                         <Profile>
-                            <img src="https://github.com/iangs1.png" alt="Foto de perfil do usuário" />
+                            <img src={avatarUrl} alt="Foto de perfil do usuário" />
 
-                            <p>Por Ian Goldfeld Santos</p>
+                            <p>Por {user.name}</p>
                         </Profile>
 
                         <Time>
                             <FiClock size={16} stroke='#FF859B'/>
 
-                            <p>26/09/23 às 20:35</p>
+                            <p>{day}/{month}/{year} às {hour}:{minute}</p>
                         </Time>
                     </Infos>
                 </Search>
 
                 <Tags>
-                    <Tag>Ficção Científica</Tag>
-                    <Tag>Drama</Tag>
-                    <Tag>Família</Tag>
+                        {
+                            movie && movie.tags &&
+                            movie.tags.map(tag => (
+                                <Tag key={tag.id}>{tag.name}</Tag>
+                            ))
+                        }
                 </Tags>
 
                 <Summary>
-                    Pragas nas colheitas fizeram a civilização humana regredir para uma sociedade agrária em futuro de data desconhecida. 
-                    Cooper, ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a filha de dez anos de Cooper, acredita que 
-                    seu quarto está assombrado por um fantasma que tenta se comunicar com ela. Pai e filha descobrem que o "fantasma" 
-                    é uma inteligência desconhecida que está enviando mensagens codificadas através de radiação gravitacional, deixando 
-                    coordenadas em binário que os levam até uma instalação secreta da NASA liderada pelo professor John Brand. O cientista 
-                    revela que um buraco de minhoca foi aberto perto de Saturno e que ele leva a planetas que podem oferecer condições de 
-                    sobrevivência para a espécie humana. As "missões Lázaro" enviadas anos antes identificaram três planetas potencialmente
-                    habitáveis orbitando o buraco negro Gargântua: Miller, Edmunds e Mann – nomeados em homenagem aos astronautas que os 
-                    pesquisaram. Brand recruta Cooper para pilotar a nave espacial Endurance e recuperar os dados dos astronautas; se um 
-                    dos planetas se mostrar habitável, a humanidade irá seguir para ele na instalação da NASA, que é na realidade uma 
-                    enorme estação espacial. A partida de Cooper devasta Murphy.
-                    Além de Cooper, a tripulação da Endurance é formada pela bióloga Amelia, filha de Brand; o 
-                    cientista Romilly, o físico planetário Doyle, além dos robôs TARS e CASE. Eles entram no buraco de 
-                    minhoca e se dirigem a Miller, porém descobrem que o planeta possui enorme dilatação gravitacional 
-                    temporal por estar tão perto de Gargântua: cada hora na superfície equivale a sete anos na Terra. 
-                    Eles entram em Miller e descobrem que é inóspito já que é coberto por um oceano raso e agitado por 
-                    ondas enormes. Uma onda atinge a tripulação enquanto Amelia tenta recuperar os dados de Miller, matando 
-                    Doyle e atrasando a partida. Ao voltarem para a Endurance, Cooper e Amelia descobrem que 23 anos se passaram.
+                        {
+                            movie &&
+                            movie.movie.description
+                        }
                 </Summary>
             </Content>
         </Container>
